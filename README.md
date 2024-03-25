@@ -19,15 +19,15 @@ For Windows systems WSL installed.
 
 Example for Windows:
 
-Download files and open console in location where these files are stored.
+Download files and open console. Change directory to the location of the downloaded files.
 
 ```cmd
 cd C:\location\of\downloaded\files\
 ```
 
-If you want to change Apache welcome page content you can edit index.html file.
+If changing Apache welcome page content, edit index.html file.
 
-If you want to change current port Apache working on you have to edit apache_000-default_config_8080.txt and apache_ports_config_8080.txt files. For now port 8080 is set instead of 80. If you want to set up different port you have to change port 8080 to desired port. Remember to change it only in places where port 8080 is set. Other ports are for ssl, etc.
+If changing current port Apache working on, edit apache_000-default_config_8080.txt and apache_ports_config_8080.txt files. For now port 8080 is set instead of 80. If setting up different port, change port 8080 to desired port. Remember to change it only in places where port 8080 is set. Other ports are for ssl, etc.
 
 Then run command to build new image with Dockerfile named web100:
 
@@ -37,23 +37,23 @@ docker build -t web100 .
 
 ## Container Setup and Running
 
-To create container with web100 image you need to specify modes it will run with (-d in this case), ports (-p portOnYourHostMachine:PortOnApacheServer(8080 default for this image)), name of container (--name web100container in this case) and any additional options you will need. Example command below.
+To create a container with the web100 image, specify the modes it will run in (-d in this case), ports (-p portOnYourHostMachine:PortOnApacheServer(8080 default for this image)), the name of the container (--name web100container in this case) and any additional options that will be needed. Example command below.
 
 ```cmd
 docker run -d -p 8080:8080 --name web100container web100
 ```
 
-After that you can access Apache server working on running container through port 8080 in this case. Just type in search bar localhost:8080.
+After that, it is possible to access the Apache server working on the running container through port 8080 in this case. Just type localhost:8080 in the browser search bar.
 
 ![Working Apache Server on Host Computer](screenshots/server_working.jpg)
 
-If you want to stop running container:
+If stopping a running container:
 
 ```cmd
 docker stop web100container
 ```
 
-If you want to start not running but previously created container:
+If starting a container that is not running but was previously created:
 
 ```cmd
 docker start web100container
@@ -61,7 +61,7 @@ docker start web100container
 
 ## Image Layers
 
-To specify how much layers our image has we need to execute command:
+To specify how many layers image has, execute the command:
 
 ```cmd
 docker inspect web100
@@ -71,7 +71,7 @@ and look for node RootFS where layers are listed like this:
 
 ![Part of Docker Inspect Command Result](screenshots/docker_inspect.jpg)
 
-In this case we got 5 layers. To specify what actions are responsible for creation of certain layers we need to execute another command:
+In this case, there are 5 layers. To specify what actions are responsible for creation of certain layers, execute another command:
 
 ```cmd
 docker history web100
@@ -83,5 +83,5 @@ Result of previous command:
 
 ![Docker History Command Result](screenshots/docker_history.jpg)
 
-Looking at layers with size larger than 0B we need to look at CREATED BY column. There are informations about what commands are responsible for certain layers.
+Looking at layers with a size larger than 0B, examine the CREATED BY column. There is information about what commands are responsible for certain layers.
 
