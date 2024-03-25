@@ -7,7 +7,7 @@ Example usage of Dockerfile in configuration of Apache server on ubuntu with Apa
 - [Requirements](#requirements)
 - [Image Building](#image-building)
 - [Container Setup and Running](#container-setup-and-running)
-- [Image Testing](#image-testing)
+- [Image Layers](#image-layers)
 
 ## Requirements
 
@@ -59,5 +59,29 @@ If you want to start not running but previously created container:
 docker start web100container
 ```
 
-## Image Testing
+## Image Layers
+
+To specify how much layers our image has we need to execute command:
+
+```cmd
+docker inspect web100
+```
+
+and look for node RootFS where layers are listed like this:
+
+![Part of Docker Inspect Command Result](screenshots/docker_inspect.jpg)
+
+In this case we got 5 layers. To specify what actions are responsible for creation of certain layers we need to execute another command:
+
+```cmd
+docker history web100
+```
+
+and look for lines where size in SIZE column is larger than 0B because only layers larger than 0B are considered as layers.
+
+Result of previous command:
+
+![Docker History Command Result](screenshots/docker_history.jpg)
+
+Looking at layers with size larger than 0B we need to look at CREATED BY column. There are informations about what commands are responsible for certain layers.
 
