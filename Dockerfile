@@ -1,6 +1,6 @@
 FROM ubuntu:latest
-LABEL org.opencontainers.image.author = "Kopeć" \
-      org.opencontainers.image.email = "s97641@pollub.edu.pl"
+LABEL org.opencontainers.image.author="Kopeć" \
+      org.opencontainers.image.email="s97641@pollub.edu.pl"
 RUN apt-get update && apt-get install -y \
     apache2 \
     && apt-get clean \
